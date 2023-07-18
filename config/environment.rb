@@ -1,0 +1,5 @@
+require 'rubygems'
+require 'bundler/setup'
+require './config/application.rb'
+require './middleware/request_id'
+require './system/app_logger'

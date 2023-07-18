@@ -9,7 +9,7 @@ class Router
     if controller.respond_to?(route_info[:action])
       controller.send(route_info[:action])
     else
-      not_found
+      controller.not_found
     end
   end
 
@@ -29,7 +29,7 @@ class Router
   def find_action(fragment)
     case fragment
     when nil
-      @request.get? ? :ping : nil
+      @request.get? ? :ping : :pong
     else
       nil
     end
@@ -44,10 +44,6 @@ class Router
     controller_name = route_info[:resource].capitalize
     Object.const_get("Controllers::#{controller_name}Controller")
   rescue NameError
-    nil
-  end
-
-  def not_found(status: 404)
-    [status, { "Content-Type" => "text/html" }, ["Not found"]]
+    Controllers::BaseController
   end
 end

@@ -7,5 +7,10 @@ module Controllers
     def ping
       build_response(body: ["PONG"])
     end
+
+    # @!method [POST]
+    def pong
+      build_response(body: ["PING"])
+    end
   end
 end

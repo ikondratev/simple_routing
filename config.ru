@@ -1,8 +1,4 @@
-require 'rubygems'
-require 'bundler/setup'
-require './application'
-require './middleware/request_id'
-require './system/app_logger'
+require './config/environment'
 
 use Rack::Ougai::LogRequests, System::AppLogger.new.instance
 use Middleware::RequestId

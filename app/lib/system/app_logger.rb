@@ -3,10 +3,24 @@ require 'rack/ougai'
 module System
   class AppLogger
     attr_reader :instance
+    PRODUCTION_MODE = "production".freeze
 
     def initialize(mode: "development")
       @mode = mode
-      @instance = debug_mode
+      @instance = PRODUCTION_MODE.include?(mode) ? prod_mode : debug_mode
+    end
+
+    private
+
+    def prod_mode
+      root_path = File.expand_path("../..", __dir__)
+
+      logger = Ougai::Logger.new(
+        root_path.concat("/", Settings.log.path),
+        level: Settings.log.level
+      )
+
+      setup_logger_output(logger)
     end
 
     def debug_mode

@@ -1,6 +1,6 @@
 require 'securerandom'
 
-module Middleware
+module System
   class RequestId
     REQUEST_ID = "X-Request-Id"
 

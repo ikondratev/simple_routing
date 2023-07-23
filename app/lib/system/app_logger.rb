@@ -31,6 +31,7 @@ module System
     def setup_logger_output(logger)
       logger.before_log = lambda do |data|
         data[:app_mode] = @mode
+        data[:tag] = Settings.tag.version
         data[:request_id] ||= Thread.current[:request_id]
       end
 
